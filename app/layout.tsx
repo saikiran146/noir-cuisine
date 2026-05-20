@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#050505",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -84,7 +84,7 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${cormorant.variable} ${geistMono.variable}`}
     >
-      <body className="bg-noir-950 text-cream antialiased film-grain overflow-x-hidden">
+      <body className="bg-white text-noir-800 antialiased overflow-x-hidden">
         <SmoothScroll>
           <CustomCursor />
           {children}
