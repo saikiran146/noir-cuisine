@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const dishes = [
   {
@@ -10,8 +11,7 @@ const dishes = [
     subtitle: 'Dry-aged Beef Tenderloin',
     description: 'Slow-roasted Dexter beef from Bluestack Farm, served with truffle jus, root vegetable terrine, and wild herb oil.',
     tags: ['Bluestack Farm', 'Donegal'],
-    bg: 'bg-stone',
-    accent: 'rgba(201,169,110,0.15)',
+    photo: '/images/dish-1.jpg',
   },
   {
     number: '02',
@@ -19,8 +19,7 @@ const dishes = [
     subtitle: 'Pan-seared Hand-dived',
     description: 'Hand-dived scallops from Donegal Bay, caramelised with cultured butter, cauliflower purée, and caviar.',
     tags: ['Donegal Bay', 'Seasonal'],
-    bg: 'bg-cream',
-    accent: 'rgba(201,169,110,0.1)',
+    photo: '/images/dish-2.jpg',
   },
   {
     number: '03',
@@ -28,8 +27,7 @@ const dishes = [
     subtitle: 'Herb-crusted Fillet',
     description: 'Atlantic halibut in a delicate saffron broth, with sea vegetables, samphire, and a citrus beurre blanc.',
     tags: ['Wild Caught', 'Atlantic'],
-    bg: 'bg-stone',
-    accent: 'rgba(201,169,110,0.12)',
+    photo: '/images/dish-3.jpg',
   },
   {
     number: '04',
@@ -37,8 +35,7 @@ const dishes = [
     subtitle: 'Herb & Pistachio Crusted',
     description: 'Rack of Donegal mountain lamb with a pistachio and herb crust, rosemary jus, and seasonal root vegetables.',
     tags: ['Donegal Highland', 'Heritage'],
-    bg: 'bg-cream',
-    accent: 'rgba(201,169,110,0.08)',
+    photo: '/images/dish-4.jpg',
   },
 ]
 
@@ -55,33 +52,22 @@ function DishCard({ dish, index }: { dish: typeof dishes[0]; index: number }) {
       className="group relative bg-white luxury-border card-shadow overflow-hidden"
     >
       {/* Dish visual */}
-      <div className={`aspect-[4/3] relative overflow-hidden ${dish.bg}`}>
-        <div
-          className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
-          style={{
-            background: `linear-gradient(135deg, #F5F0E8 0%, #EBE4D9 50%, #F2EDE5 100%)`,
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: `radial-gradient(circle at 50% 50%, ${dish.accent} 0%, transparent 70%)` }}
+      <div className="aspect-[4/3] relative overflow-hidden">
+        <Image
+          src={dish.photo}
+          alt={dish.name}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
         {/* Number watermark */}
-        <div className="absolute top-3 left-4 font-serif text-7xl font-light text-noir-800/5 leading-none select-none">
+        <div className="absolute top-3 left-4 font-serif text-7xl font-light text-white/20 leading-none select-none z-10">
           {dish.number}
         </div>
-        {/* Plate ornament */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-15 group-hover:opacity-25 transition-opacity duration-500">
-          <div className="w-20 h-20 rounded-full border border-gold/50 flex items-center justify-center">
-            <div className="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-gold/60" />
-            </div>
-          </div>
-        </div>
         {/* Bottom gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-noir-800/30 to-transparent" />
         {/* Gold hover shimmer */}
-        <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
       {/* Content */}

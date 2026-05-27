@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 
 export default function ChefStory() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -90,23 +91,18 @@ export default function ChefStory() {
             className="relative"
           >
             <div className="aspect-[3/4] bg-stone relative overflow-hidden luxury-border card-shadow">
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(160deg, #F5F0E8 0%, #EBE4D9 50%, #F2EDE5 100%)' }}
+              <Image
+                src="/images/chef-story.jpg"
+                alt="Chef Brian McMonagle"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 flex items-end justify-center pb-14">
-                <div className="text-center space-y-3">
-                  <div
-                    className="w-28 h-28 rounded-full mx-auto border border-gold/25 flex items-center justify-center"
-                    style={{ background: 'linear-gradient(135deg, rgba(201,169,110,0.1), rgba(201,169,110,0.05))' }}
-                  >
-                    <div className="font-serif text-gold/50 text-3xl">B</div>
-                  </div>
-                  <div className="font-serif text-noir-700 text-lg">Brian McMonagle</div>
-                  <div className="font-sans text-gold-dark text-xs tracking-widest uppercase">Head Chef & Owner</div>
-                </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-noir-800/50 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-center">
+                <div className="font-serif text-white text-lg">Brian McMonagle</div>
+                <div className="font-sans text-gold text-xs tracking-widest uppercase mt-1">Head Chef & Owner</div>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-stone/30 via-transparent to-transparent" />
             </div>
 
             {/* Floating quote */}

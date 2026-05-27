@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const stats = [
   { value: '2026', label: 'Yes Chef Award' },
@@ -29,18 +30,14 @@ export default function About() {
           >
             <div className="relative">
               <div className="aspect-[3/4] bg-stone relative overflow-hidden luxury-border card-shadow">
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(160deg, #F5F0E8 0%, #EBE4D9 50%, #F2EDE5 100%)' }}
+                <Image
+                  src="/images/location.jpg"
+                  alt="No. 9 Market Square, Letterkenny"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="font-serif text-9xl text-gold/20 leading-none select-none">9</div>
-                    <div className="w-16 h-px bg-gold/30 mx-auto" />
-                    <p className="font-sans text-noir-400 text-xs tracking-widest-3 uppercase">Est. Letterkenny</p>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-stone/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-noir-800/40 via-transparent to-transparent" />
               </div>
 
               {/* Floating award card */}

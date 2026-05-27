@@ -2,37 +2,20 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const galleryItems = [
-  { id: 1, span: 'col-span-2 row-span-2', label: 'The Kitchen', gradient: 'from-stone via-cream to-stone', accent: 'rgba(201,169,110,0.18)' },
-  { id: 2, span: 'col-span-1 row-span-1', label: 'Bluestack Beef', gradient: 'from-cream to-stone', accent: 'rgba(201,169,110,0.12)' },
-  { id: 3, span: 'col-span-1 row-span-1', label: 'Scallop Dish', gradient: 'from-stone to-cream', accent: 'rgba(201,169,110,0.1)' },
-  { id: 4, span: 'col-span-1 row-span-2', label: 'The Dining Room', gradient: 'from-warm-white to-stone', accent: 'rgba(201,169,110,0.15)' },
-  { id: 5, span: 'col-span-1 row-span-1', label: 'Market Square', gradient: 'from-stone via-cream to-stone', accent: 'rgba(201,169,110,0.1)' },
-  { id: 6, span: 'col-span-1 row-span-1', label: 'Dessert Creation', gradient: 'from-cream to-warm-white', accent: 'rgba(201,169,110,0.12)' },
+  { id: 1, span: 'col-span-2 row-span-2', label: 'The Kitchen', accent: 'rgba(201,169,110,0.18)', photo: '/images/gallery-1.jpg' },
+  { id: 2, span: 'col-span-1 row-span-1', label: 'Bluestack Beef', accent: 'rgba(201,169,110,0.12)', photo: '/images/dish-1.jpg' },
+  { id: 3, span: 'col-span-1 row-span-1', label: 'Scallop Dish', accent: 'rgba(201,169,110,0.1)', photo: '/images/dish-2.jpg' },
+  { id: 4, span: 'col-span-1 row-span-2', label: 'The Dining Room', accent: 'rgba(201,169,110,0.15)', photo: '/images/gallery-2.jpg' },
+  { id: 5, span: 'col-span-1 row-span-1', label: 'Market Square', accent: 'rgba(201,169,110,0.1)', photo: '/images/gallery-3.jpg' },
+  { id: 6, span: 'col-span-1 row-span-1', label: 'Dessert Creation', accent: 'rgba(201,169,110,0.12)', photo: '/images/dish-3.jpg' },
 ]
-
-const gradientMap: Record<string, string> = {
-  'from-stone via-cream to-stone': 'linear-gradient(135deg, #F2EDE5, #F5F0E8, #F2EDE5)',
-  'from-cream to-stone': 'linear-gradient(135deg, #F5F0E8, #EBE4D9)',
-  'from-stone to-cream': 'linear-gradient(135deg, #EBE4D9, #F5F0E8)',
-  'from-warm-white to-stone': 'linear-gradient(135deg, #FAF7F2, #EBE4D9)',
-  'from-stone via-cream to-stone2': 'linear-gradient(135deg, #F2EDE5, #F5F0E8, #EBE4D9)',
-  'from-cream to-warm-white': 'linear-gradient(135deg, #F5F0E8, #FAF7F2)',
-}
 
 function GalleryCell({ item, index }: { item: typeof galleryItems[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
-
-  const bg = [
-    'linear-gradient(135deg, #F2EDE5, #F5F0E8, #F2EDE5)',
-    'linear-gradient(135deg, #F5F0E8, #EBE4D9)',
-    'linear-gradient(135deg, #EBE4D9, #F5F0E8)',
-    'linear-gradient(135deg, #FAF7F2, #EBE4D9)',
-    'linear-gradient(135deg, #F2EDE5, #F5F0E8)',
-    'linear-gradient(135deg, #F5F0E8, #FAF7F2)',
-  ][index] || 'linear-gradient(135deg, #F5F0E8, #EBE4D9)'
 
   return (
     <motion.div
@@ -42,9 +25,15 @@ function GalleryCell({ item, index }: { item: typeof galleryItems[0]; index: num
       transition={{ delay: index * 0.09, duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={`${item.span} relative overflow-hidden group luxury-border`}
     >
-      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105" style={{ background: bg }} />
-      <div className="absolute inset-0" style={{ background: `radial-gradient(circle at 50% 50%, ${item.accent} 0%, transparent 70%)` }} />
-      <div className="absolute inset-0 bg-gold/3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <Image
+        src={item.photo}
+        alt={item.label}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, 50vw"
+      />
+      <div className="absolute inset-0 bg-noir-800/20 group-hover:bg-noir-800/10 transition-all duration-500" />
+      <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Gold ornament on hover */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -54,8 +43,8 @@ function GalleryCell({ item, index }: { item: typeof galleryItems[0]; index: num
       </div>
 
       {/* Label */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-white/80 to-transparent">
-        <p className="font-sans text-noir-600 text-xs tracking-widest uppercase">{item.label}</p>
+      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-black/60 to-transparent">
+        <p className="font-sans text-white text-xs tracking-widest uppercase">{item.label}</p>
       </div>
 
       <div className="absolute top-3 right-3 w-5 h-5 border-t border-r border-gold/25 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
